@@ -1,1 +1,14 @@
-# action2 here
+name: Workflow B
+
+on:
+  repository_dispatch:
+    types: [run-workflow-b]   # custom event type
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print message
+        run: |
+          echo "Workflow B triggered by repoA"
+          echo "Payload: ${{ github.event.client_payload.customData }}"
