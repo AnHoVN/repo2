@@ -12,8 +12,7 @@ jobs:
         run: |
           echo "Workflow B triggered by repoA"
           echo "Payload: ${{ github.event.client_payload.customData }}"
-          steps:
-
+          
       - name: Checkout repo2
         uses: actions/checkout@v4
 
