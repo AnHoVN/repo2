@@ -2,7 +2,7 @@ name: Workflow B
 
 on:
   repository_dispatch:
-    types: [run-workflow-b]   # custom event type
+    types: [run-workflow-b] 
 
 jobs:
   run:
@@ -12,3 +12,21 @@ jobs:
         run: |
           echo "Workflow B triggered by repoA"
           echo "Payload: ${{ github.event.client_payload.customData }}"
+          steps:
+
+      - name: Checkout repo2
+        uses: actions/checkout@v4
+
+      - name: Checkout repo1
+        uses: actions/checkout@v4
+        with:
+          repository: AnHoVN/repo1       
+          token: ${{ secrets.REPO_B_TOKEN }} 
+          path: repo1 
+
+      - name: Show repos
+        run: |
+          echo "Contents of repo2:"
+          ls -la
+          echo "Contents of repo1:"
+          ls -la repo1
